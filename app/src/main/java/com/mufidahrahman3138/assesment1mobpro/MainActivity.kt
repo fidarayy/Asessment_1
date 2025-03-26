@@ -4,13 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.*
+import com.mufidahrahman3138.assesment1mobpro.ui.MainScreen
+import com.mufidahrahman3138.assesment1mobpro.ui.SignUpScreen
 import com.mufidahrahman3138.assesment1mobpro.ui.theme.Assesment1MobproTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +15,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Assesment1MobproTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                Navigation()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun Navigation() {
+    var isSignedUp by remember { mutableStateOf(false) }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Assesment1MobproTheme {
-        Greeting("Android")
+    if (isSignedUp) {
+        MainScreen()
+    } else {
+        SignUpScreen(onSignUpSuccess = { isSignedUp = true })
     }
 }
