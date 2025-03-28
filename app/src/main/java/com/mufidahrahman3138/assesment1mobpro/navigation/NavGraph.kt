@@ -12,7 +12,7 @@ import com.mufidahrahman3138.mobpro1.ui.screen.AboutScreen
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Main.route
+        startDestination = Screen.SignUp.route
     ) {
         composable(route = Screen.Main.route) {
             MainScreen(navController)
