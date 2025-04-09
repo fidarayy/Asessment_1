@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Assesment 1 Mobpro</string>
+    <string name="tentang_aplikasi">About Application</string>
+    <string name="kembali">Return</string>
+    <string name="about_text">This application is created to help users calculate laundry costs quickly and accurately.</string>
+    <string name="about_text2">In this application the price per kg of clothing is Rp5,000 for sheets Rp13,000 while blankets are Rp20,000. Hopefully the information is useful.</string>
+</resources>

@@ -1,5 +1,6 @@
 package com.mufidahrahman3138.assesment1mobpro.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -188,6 +189,7 @@ fun LaundryScreenContent(modifier: Modifier = Modifier) {
     }
 }
 @Preview(showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun MainScreenPreview() {
     Assesment1MobproTheme {

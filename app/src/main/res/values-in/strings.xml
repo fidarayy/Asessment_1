@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Assesment 1 Mobpro</string>
+    <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="kembali">Kembali</string>
+    <string name="about_text">Aplikasi ini dibuat untuk membantu pengguna menghitung biaya laundry dengan cepat dan akurat.</string>
+    <string name="about_text2">Pada aplikasi ini harga per kg pakaian itu Rp5.000 untuk seprai Rp13.000 sedangkan selimut Rp20.000.         Semoga infonya bermanfaat.</string>
+</resources>
