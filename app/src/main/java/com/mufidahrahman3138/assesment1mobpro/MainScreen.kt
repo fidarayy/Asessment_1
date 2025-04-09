@@ -1,10 +1,16 @@
 package com.mufidahrahman3138.assesment1mobpro.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
@@ -24,12 +30,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.mufidahrahman3138.assesment1mobpro.R
 import com.mufidahrahman3138.assesment1mobpro.navigation.Screen
 import com.mufidahrahman3138.assesment1mobpro.ui.theme.Assesment1MobproTheme
 
@@ -67,6 +75,13 @@ fun LaundryScreenContent(modifier: Modifier = Modifier) {
     var hargaTotal by remember { mutableStateOf(0) }
     val hargaPerKg = 5000
 
+    val imageList = listOf(
+        R.drawable.harga_baju,
+        R.drawable.harga_selimut,
+        R.drawable.harga_seprai
+    )
+    var currentImageIndex by remember { mutableStateOf(0) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -74,28 +89,66 @@ fun LaundryScreenContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Masukkan berat cucian (kg):")
-        OutlinedTextField(
-            value = berat,
-            onValueChange = { berat = it },
-            label = { Text("Berat (kg)") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Done
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
-        Button(onClick = {
-            hargaTotal = if (berat.isNotEmpty()) berat.toInt() * hargaPerKg else 0
-        }) {
-            Text("Hitung Harga")
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                painter = painterResource(id = imageList[currentImageIndex]),
+                contentDescription = "Laundry Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
+            // Tombol Geser Kiri/Kanan
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
+            ) {
+                Button(onClick = {
+                    if (currentImageIndex > 0) currentImageIndex--
+                }) {
+                    Text("⬅")
+                }
+
+                Button(onClick = {
+                    if (currentImageIndex < imageList.size - 1) currentImageIndex++
+                }) {
+                    Text("➡")
+                }
+            }
         }
-        if (hargaTotal > 0) {
-            Text("Total Harga: Rp $hargaTotal", style = MaterialTheme.typography.headlineSmall)
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Masukkan berat cucian (kg):")
+            OutlinedTextField(
+                value = berat,
+                onValueChange = { berat = it },
+                label = { Text("Berat (kg)") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Button(
+                onClick = {
+                    hargaTotal = if (berat.isNotEmpty()) berat.toInt() * hargaPerKg else 0
+                },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Hitung Harga")
+            }
+
+            if (hargaTotal > 0) {
+                Text(
+                    "Total Harga: Rp $hargaTotal",
+                    style = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
         }
     }
 }
-
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
