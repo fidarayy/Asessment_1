@@ -72,8 +72,14 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun LaundryScreenContent(modifier: Modifier = Modifier) {
     var berat by remember { mutableStateOf("") }
+    var jumlahSeprai by remember { mutableStateOf("") }
+    var jumlahSelimut by remember { mutableStateOf("") }
     var hargaTotal by remember { mutableStateOf(0) }
+
     val hargaPerKg = 5000
+    val hargaSeprai = 13000
+    val hargaSelimut = 20000
+
 
     val imageList = listOf(
         R.drawable.harga_baju,
@@ -118,6 +124,32 @@ fun LaundryScreenContent(modifier: Modifier = Modifier) {
         }
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Masukkan jumlah cucian per lembar:")
+
+            OutlinedTextField(
+                value = jumlahSeprai,
+                onValueChange = { jumlahSeprai = it },
+                label = { Text("Jumlah Seprai") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            OutlinedTextField(
+                value = jumlahSelimut,
+                onValueChange = { jumlahSelimut = it },
+                label = { Text("Jumlah Selimut") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "Masukkan berat cucian (kg):")
             OutlinedTextField(
                 value = berat,
@@ -132,7 +164,13 @@ fun LaundryScreenContent(modifier: Modifier = Modifier) {
 
             Button(
                 onClick = {
-                    hargaTotal = if (berat.isNotEmpty()) berat.toInt() * hargaPerKg else 0
+                    val beratCuci = berat.toIntOrNull() ?: 0
+                    val sprei = jumlahSeprai.toIntOrNull() ?: 0
+                    val selimut = jumlahSelimut.toIntOrNull() ?: 0
+
+                    hargaTotal = (beratCuci * hargaPerKg) +
+                            (sprei * hargaSeprai) +
+                            (selimut * hargaSelimut)
                 },
                 modifier = Modifier.padding(top = 8.dp)
             ) {

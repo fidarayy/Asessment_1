@@ -1,7 +1,9 @@
 package com.mufidahrahman3138.mobpro1.ui.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -45,6 +47,11 @@ fun AboutScreen(navController: NavController) {
         ) {
             Text(
                 text = stringResource(R.string.about_text),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = stringResource(R.string.about_text2),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
